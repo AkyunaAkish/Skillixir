@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+import { Button } from 'react-bootstrap';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -13,10 +15,8 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.add.bind(this)}>
-          Add Number
-        </button>
+      <div className='text-center home'>
+        <Button onClick={this.add.bind(this)}>Add Number</Button>
         <div>
           { this.props.number }
         </div>
