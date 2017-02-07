@@ -19,22 +19,22 @@ class TopNav extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
+          <Nav className='text-center'>
             <NavItem eventKey={1}>
               OFFERING
-              <Glyphicon glyph='tint' className='block inline' />
+              <Glyphicon glyph='tint' className='block' />
             </NavItem>
             <NavItem eventKey={2}>
               SEEKING
-              <Glyphicon glyph='eye-open' className='block inline' />
+              <Glyphicon glyph='eye-open' className='block' />
             </NavItem>
             <NavItem eventKey={3}>
               SIGN IN
-              <Glyphicon glyph='log-in' className='block inline' />
+              <Glyphicon glyph='log-in' className='block' />
             </NavItem>
             <NavItem eventKey={4}>
-              SIGN U
-              <Glyphicon glyph='globe' className='block inline' />
+              SIGN UP
+              <Glyphicon glyph='globe' className='block' />
             </NavItem>
           </Nav>
         </Navbar.Collapse>

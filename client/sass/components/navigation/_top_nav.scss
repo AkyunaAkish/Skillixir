@@ -3,14 +3,19 @@
 .top-nav {
     .navbar-toggle {
         margin: 15px;
-        background: $green;
+        background: $grey;
+        border-color: $green;
 
         .icon-bar {
-            background: $black;
+            background: $green;
         }
 
         &:hover {
-            background: $blue;
+            border-color: $blue;
+
+            .icon-bar {
+                background: $blue;
+            }
         }
     }
 
