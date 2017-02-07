@@ -1,0 +1,42 @@
+@import '../../utils/variables';
+
+.side-nav {
+    width: 100px;
+    height: 100%;
+    float: left;
+    border-right: 1px solid $grey;
+    overflow: scroll;
+
+    .side-link {
+        * {
+            .icon {
+                color: $green;
+
+                &:nth-of-type(odd) {
+                    .icon {
+                        color: $blue;
+                    }
+                }
+            }
+        }
+    }
+
+    .side-nav-button {
+        width: 100%;
+        max-height: 82px;
+        min-height: 82px;
+        background-color: $darkGrey;
+        color: $white;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid $lightGrey;
+
+        &:hover {
+            color: $blue;
+
+            .icon {
+                color: $white;
+            }
+        }
+    }
+}

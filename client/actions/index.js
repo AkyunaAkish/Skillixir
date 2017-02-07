@@ -1,8 +1,5 @@
-import { ADD_NUMBER } from './types';
+import addNumber from './navigation/addNumber';
 
-export function addNumber() {
-    return {
-        type: ADD_NUMBER,
-        payload: 1
-    };
+export {
+  addNumber
 }

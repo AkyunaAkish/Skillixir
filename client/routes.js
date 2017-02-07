@@ -2,11 +2,19 @@ import React from 'react';
 import { Route, IndexRoute, Redirect } from 'react-router';
 
 import Layout from './components/Layout';
-import Home from './components/Home';
+import Gateway from './components/navigation/Gateway';
+import Offering from './components/search/Offering';
+import Seeking from './components/search/Seeking';
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
 
 export default (
   <Route path='/' component={ Layout }>
-    <IndexRoute component={ Home } />
+    <IndexRoute component={ Gateway } />
+    <Route path='/offering' component={ Offering }></Route>
+    <Route path='/seeking' component={ Seeking }></Route>
+    <Route path='/signin' component={ SignIn }></Route>
+    <Route path='/signup' component={ SignUp }></Route>
     <Redirect from='*' to='/' />
   </Route>
 );

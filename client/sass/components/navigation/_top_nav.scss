@@ -1,0 +1,21 @@
+@import '../../utils/variables';
+
+.top-nav {
+    .navbar-toggle {
+        margin: 15px;
+        background: $green;
+
+        .icon-bar {
+            background: $black;
+        }
+
+        &:hover {
+            background: $blue;
+        }
+    }
+
+    .navbar-brand {
+        height: 70px !important;
+        width: 144px !important;
+    }
+}

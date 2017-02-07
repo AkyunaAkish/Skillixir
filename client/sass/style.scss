@@ -1,2 +1,9 @@
 @import './components/layout';
-@import './components/home';
+@import './components/search/home';
+@import './components/navigation/gateway';
+@import './components/navigation/top_nav';
+@import './components/navigation/side_nav';
+@import './components/search/offering';
+@import './components/search/seeking';
+@import './components/auth/sign_in';
+@import './components/auth/sign_up';

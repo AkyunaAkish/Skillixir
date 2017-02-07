@@ -1,35 +1,28 @@
 import React, { Component } from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
+import _ from 'lodash';
+import TopNav from './navigation/TopNav';
+import SideNav from './navigation/SideNav';
 
 class Layout extends Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    let buttons = document.querySelectorAll('button');
+
+    _.each(buttons, (el) => {
+      el.addEventListener('click', () => {
+        el.blur();
+      });
+    });
+  }
+
   render() {
     return (
       <div className='layout'>
-        <nav className='side-nav'>
-          <Button className='side-nav-button logo-button'>
-            <img src='/images/logo_white_text.png'/>
-          </Button>
-          <Button className='side-nav-button'>
-            OFFERING
-            <Glyphicon glyph='tint' className='block icon' />
-          </Button>
-          <Button className='side-nav-button'>
-            SEEKING
-            <Glyphicon glyph='eye-open' className='block icon' />
-          </Button>
-          <Button className='side-nav-button'>
-            SIGN IN
-            <Glyphicon glyph='log-in' className='block icon' />
-          </Button>
-          <Button className='side-nav-button'>
-            SIGN UP
-            <Glyphicon glyph='globe' className='block icon' />
-          </Button>
-        </nav>
+        <TopNav />
+        <SideNav />
         <section className='main-content'>
           { this.props.children }
         </section>

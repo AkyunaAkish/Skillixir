@@ -34,51 +34,27 @@ video {
     height: 100%;
     position: absolute;
 
-    .side-nav {
-        width: 100px;
-        height: 100%;
-        float: left;
-        border-right: 1px solid $grey;
-
-        .side-nav-button {
-            width: 100%;
-            max-height: 82px;
-            min-height: 82px;
-            background-color: $darkGrey;
-            color: $white;
-            border: none;
-            border-radius: 0;
-            border-bottom: 1px solid $lightGrey;
-
-            .icon {
-                color: $green;
-            }
-
-            &:hover {
-                color: $green;
-
-                .icon {
-                    color: $white;
-                }
-            }
-
-            &:nth-child(odd) {
-                .icon {
-                    color: $blue;
-                }
-
-                &:hover {
-                    color: $blue;
-
-                    .icon {
-                        color: $white;
-                    }
-                }
-            }
-        }
-    }
-
     .main-content {
         height: 100%;
+        color: $white;
+        text-align: center;
+        padding-top: 15px;
+    }
+}
+
+.top-nav {
+    display: none;
+}
+
+.side-nav {
+    display: block;
+}
+@media screen and (max-width: 500px) {
+    .top-nav {
+        display: block;
+    }
+
+    .side-nav {
+        display: none;
     }
 }
