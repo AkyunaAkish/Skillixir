@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 
+const twilio = require('./server/components/twilio/twilio');
+
 const app = express();
 
 app.use(cors());
@@ -17,6 +19,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
+
+app.use('/twilio', twilio);
 
 app.all('*', (req, res, next) => {
     res.sendFile('index.html', {

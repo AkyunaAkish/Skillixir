@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/AkyunaAkish/skillixir#readme",
   "devDependencies": {
+    "axios": "^0.15.3",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",
@@ -51,6 +52,7 @@
     "express": "^4.14.1",
     "lodash": "^4.17.4",
     "morgan": "^1.8.0",
-    "socket.io": "^1.7.2"
+    "socket.io": "^1.7.2",
+    "twilio": "^2.11.1"
   }
 }

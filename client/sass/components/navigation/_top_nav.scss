@@ -1,6 +1,14 @@
 @import '../../utils/variables';
 
 .top-nav {
+    a {
+        color: $white !important;
+    }
+
+    span {
+        color: $green !important;
+    }
+
     .navbar-toggle {
         margin: 15px;
         background: $grey;

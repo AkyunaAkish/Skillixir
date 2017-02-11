@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import { Button, Glyphicon } from 'react-bootstrap';
 
 class SideNav extends Component {
@@ -7,38 +7,32 @@ class SideNav extends Component {
     super(props);
   }
 
+  changeRoute(route) {
+    browserHistory.push(route);
+  }
+
   render() {
     return (
       <nav className='side-nav'>
-        <Link to='/' className='side-link'>
-          <Button className='side-nav-button logo-button'>
-            <img src='/images/logo_white_text.png'/>
-          </Button>
-        </Link>
-        <Link to='/offering' className='side-link'>
-          <Button className='side-nav-button'>
-            OFFERING
-            <Glyphicon glyph='tint' className='block icon' />
-          </Button>
-        </Link>
-        <Link to='/seeking' className='side-link'>
-          <Button className='side-nav-button'>
-            SEEKING
-            <Glyphicon glyph='eye-open' className='block icon' />
-          </Button>
-        </Link>
-        <Link to='/signin' className='side-link'>
-          <Button className='side-nav-button'>
-            SIGN IN
-            <Glyphicon glyph='log-in' className='block icon' />
-          </Button>
-        </Link>
-        <Link to='/signup' className='side-link'>
-          <Button className='side-nav-button'>
-            SIGN UP
-            <Glyphicon glyph='globe' className='block icon' />
-          </Button>
-        </Link>
+        <Button className='side-nav-button logo-button' onClick={this.changeRoute.bind(this, '/')}>
+          <img src='/images/logo_white_text.png'/>
+        </Button>
+        <Button className='side-nav-button' onClick={this.changeRoute.bind(this, '/offering')}>
+          OFFERING
+          <Glyphicon glyph='tint' className='block icon' />
+        </Button>
+        <Button className='side-nav-button' onClick={this.changeRoute.bind(this, '/seeking')}>
+          SEEKING
+          <Glyphicon glyph='eye-open' className='block icon' />
+        </Button>
+        <Button className='side-nav-button' onClick={this.changeRoute.bind(this, '/signin')}>
+          SIGN IN
+          <Glyphicon glyph='log-in' className='block icon' />
+        </Button>
+        <Button className='side-nav-button' onClick={this.changeRoute.bind(this, '/signup')}>
+          SIGN UP
+          <Glyphicon glyph='globe' className='block icon' />
+        </Button>
       </nav>
     );
   }

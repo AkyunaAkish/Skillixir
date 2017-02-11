@@ -10,7 +10,7 @@ body,
 html {
     height: 100%;
     position: relative;
-    background-color: $black;
+    // background-color: $black;
 }
 
 embed,
@@ -36,7 +36,7 @@ video {
 
     .main-content {
         height: 100%;
-        color: $white;
+        // color: $white;
         text-align: center;
         padding-top: 15px;
     }
@@ -48,6 +48,11 @@ video {
 
 .side-nav {
     display: block;
+}
+
+.videoEl {
+    height: 600px;
+    width: 600px;
 }
 @media screen and (max-width: 500px) {
     .top-nav {

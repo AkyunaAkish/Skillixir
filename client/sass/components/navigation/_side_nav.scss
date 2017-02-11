@@ -4,22 +4,7 @@
     width: 100px;
     height: 100%;
     float: left;
-    border-right: 1px solid $grey;
     overflow: visible;
-
-    .side-link {
-        * {
-            .icon {
-                color: $green;
-
-                &:nth-of-type(odd) {
-                    .icon {
-                        color: $blue;
-                    }
-                }
-            }
-        }
-    }
 
     .side-nav-button {
         width: 100%;
@@ -29,14 +14,15 @@
         color: $white;
         border: none;
         border-radius: 0;
-        border-bottom: 1px solid $lightGrey;
+        border-bottom: 1px solid $grey;
+        border-right: 1px solid $grey;
 
         &:hover {
-            color: $blue;
+            color: $whiteT;
+        }
 
-            .icon {
-                color: $white;
-            }
+        .icon {
+            color: $green;
         }
     }
 }
