@@ -1,8 +1,10 @@
-import { UPDATE_VIDEO_CLIENT } from '../types';
+import { UPDATE_ACTIVE_ROOM } from '../types';
 
-export function updateVideoClient(payload) {
-    return {
-        type: UPDATE_VIDEO_CLIENT,
-        payload: payload
-    };
+export function updateActiveRoom(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_ACTIVE_ROOM,
+      payload: payload
+    });
+  }
 }

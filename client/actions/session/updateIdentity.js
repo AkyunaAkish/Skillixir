@@ -4,23 +4,17 @@ import { UPDATE_IDENTITY } from '../types';
 import { updateVideoClient } from './updateVideoClient';
 
 export function updateIdentity(payload) {
-  return (dispatch) => {
-    console.log('host', host);
-    return axios.get(`${host}/twilio/get-video-token`)
-                .then((tokenRes) => {
-                    console.log('tokenRes From Twilio api route', tokenRes);
-                    dispatch(updateVideoClient(tokenRes.data.success.token));
-                    return {
-                        type: UPDATE_IDENTITY,
-                        payload: tokenRes.data.identity
-                    };
-                })
-                .catch((err) => {
-                    console.log('Error in update identity action handler', err);
-                    return {
-                        type: UPDATE_IDENTITY,
-                        payload: ''
-                    }
+    return (dispatch) => {
+        return axios.get(`${host}/twilio/get-video-token`)
+            .then((tokenRes) => {
+                dispatch(updateVideoClient(new Twilio.Video.Client(tokenRes.data.success.token)));
+                dispatch({
+                    type: UPDATE_IDENTITY,
+                    payload: tokenRes.data.success.identity
                 });
-  };
+            })
+            .catch((err) => {
+                console.log('Error in update identity action handler', err);
+            });
+    };
 }

@@ -8,10 +8,7 @@ class Session extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoClient: null,
       activeRoom: null,
-      previewMedia: null,
-      identity: null,
       roomName: null
     };
   }
@@ -26,12 +23,8 @@ class Session extends Component {
   }
 
   getIdentity() {
-    axios.get(`${host}/twilio/get-video-token`)
-    .then((tokenRes) => {
-      this.setState({
-        videoClient: new Twilio.Video.Client(tokenRes.data.success.token),
-        identity: tokenRes.data.success.identity
-      });
+    this.props.updateIdentity()
+    .then(() => {
       document.getElementById('room-controls').style.display = 'block';
     })
     .catch((err) => {
@@ -40,14 +33,13 @@ class Session extends Component {
   }
 
   preview() {
-    if (!this.state.previewMedia) {
-      this.setState({
-        previewMedia: new Twilio.Video.LocalMedia()
-      });
+    if (!this.props.previewMedia) {
+      this.props.updatePreviewMedia(new Twilio.Video.LocalMedia());
+
       Twilio.Video.getUserMedia()
       .then((mediaStream) => {
-        this.state.previewMedia.addStream(mediaStream);
-        this.state.previewMedia.attach('#local-media');
+        this.props.previewMedia.addStream(mediaStream);
+        this.props.previewMedia.attach('#local-media');
         this.log('Test');
       })
       .catch((err) => {
@@ -58,36 +50,33 @@ class Session extends Component {
   }
 
   joinRoom() {
-    this.setState({
-      roomName: document.getElementById('room-name').value
+    this.props.updateRoomName(this.props.roomNameInput);
+    setTimeout(() => {
+      if (this.props.roomName) {
+        this.log("Joining room '" + this.props.roomName + "'...");
+
+        this.props.videoClient.connect({ to: this.props.roomName})
+        .then((room) => {
+          this.roomJoined(room);
+        })
+        .catch((err) => {
+          this.log('Could not connect to Twilio: ' + err.message);
+        });
+      } else {
+        alert('Please enter a room name.');
+      }
     });
-
-    if (this.state.roomName) {
-      this.log("Joining room '" + this.state.roomName + "'...");
-
-      this.state.videoClient.connect({ to: this.state.roomName})
-      .then((room) => {
-        this.roomJoined(room);
-      })
-      .catch((err) => {
-        this.log('Could not connect to Twilio: ' + err.message);
-      });
-    } else {
-      alert('Please enter a room name.');
-    }
   }
 
   roomJoined(room) {
-    this.setState({
-      activeRoom: room
-    });
+    this.props.updateActiveRoom(room);
 
-    this.log("Joined as '" + this.state.identity + "'");
+    this.log("Joined as '" + this.props.identity + "'");
 
     document.getElementById('button-join').style.display = 'none';
     document.getElementById('button-leave').style.display = 'inline';
 
-    if (!this.state.previewMedia) {
+    if (!this.props.previewMedia) {
       room.localParticipant.media.attach('#local-media');
     }
 
@@ -117,9 +106,7 @@ class Session extends Component {
         participant.media.detach();
       });
 
-      this.setState({
-        activeRoom: null
-      });
+      this.props.updateActiveRoom(null);
 
       document.getElementById('button-join').style.display = 'inline';
       document.getElementById('button-leave').style.display = 'none';
@@ -129,38 +116,40 @@ class Session extends Component {
 
   leaveRoom() {
     this.log('Leaving room...');
-    this.state.activeRoom.disconnect();
+    if (this.props && this.props.activeRoom) {
+      this.props.activeRoom.disconnect();
+    }
   }
 
   leaveRoomIfJoined() {
-    if (this.state.activeRoom) {
-      this.state.activeRoom.disconnect();
+    if (this.props && this.props.activeRoom) {
+      this.props.activeRoom.disconnect();
     }
   }
 
   log(message) {
-    var logDiv = document.getElementById('this.log');
+    var logDiv = document.getElementById('log');
     logDiv.innerHTML += '<p>&gt;&nbsp;' + message + '</p>';
     logDiv.scrollTop = logDiv.scrollHeight;
   }
 
   render() {
     return (
-      <div>
-        <div id="remote-media"></div>
-        <div id="controls">
-          <div id="preview">
-            <p className="instructions">Hello Beautiful</p>
-            <div id="local-media"></div>
-            <button id="button-preview" onClick={ this.preview.bind(this) }>Preview My Camera</button>
+      <div className='session-container'>
+        <div id='remote-media'></div>
+        <div id='controls'>
+          <div id='preview'>
+            <p className='instructions'>Session</p>
+            <div id='local-media'></div>
+            <button id='button-preview' onClick={ this.preview.bind(this) }>Preview My Camera</button>
           </div>
-          <div id="room-controls">
-            <p className="instructions">Room Name:</p>
-            <input id="room-name" type="text" placeholder="Enter a room name" />
-            <button id="button-join" onClick={ this.joinRoom.bind(this) }>Join Room</button>
-            <button id="button-leave" onClick={ this.leaveRoom.bind(this) }>Leave Room</button>
+          <div id='room-controls'>
+            <p className='instructions'>Room Name:</p>
+            <input id='room-name' type='text' value={ this.props.roomNameInput } onChange={ this.props.updateRoomNameInput } placeholder='Enter a room name'/>
+            <button id='button-join' onClick={ this.joinRoom.bind(this) }>Join Room</button>
+            <button id='button-leave' onClick={ this.leaveRoom.bind(this) }>Leave Room</button>
           </div>
-          <div id="this.log"></div>
+          <div id='log'></div>
         </div>
       </div>
     );
@@ -173,7 +162,8 @@ function mapStateToProps(state) {
     activeRoom: state.session_reducer.activeRoom,
     previewMedia: state.session_reducer.previewMedia,
     identity: state.session_reducer.identity,
-    roomName: state.session_reducer.roomName
+    roomName: state.session_reducer.roomName,
+    roomNameInput: state.session_reducer.roomNameInput
   }
 }
 
