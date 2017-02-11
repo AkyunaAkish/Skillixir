@@ -10,6 +10,6 @@ import store from './store';
 
 ReactDOM.render(
   <Provider store={store(reducers)}>
-    <Router history={browserHistory} routes={routes}/>
+    <Router history={ browserHistory } routes={ routes }/>
   </Provider>
   , document.querySelector('#main'));

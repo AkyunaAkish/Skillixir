@@ -6,5 +6,5 @@ export function updatePreviewMedia(payload) {
       type: UPDATE_PREVIEW_MEDIA,
       payload: payload
     });
-  }
+  };
 }

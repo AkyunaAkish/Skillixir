@@ -6,5 +6,5 @@ export function updateActiveRoom(payload) {
       type: UPDATE_ACTIVE_ROOM,
       payload: payload
     });
-  }
+  };
 }

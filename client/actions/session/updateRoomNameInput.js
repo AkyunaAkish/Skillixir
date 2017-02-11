@@ -6,5 +6,5 @@ export function updateRoomNameInput(payload) {
       type: UPDATE_ROOM_NAME_INPUT,
       payload: payload.target.value
     });
-  }
+  };
 }
